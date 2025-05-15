@@ -1,0 +1,47 @@
+name: videogallery
+description: Discover or search videos via the Pixabay API. Built with Flutter and Riverpod, following Clean Architecture principles.
+version: 1.0.0+1
+publish_to: none
+
+environment:
+  sdk: ^3.7.2
+
+dependencies:
+  # Flutter
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.19.0
+
+  # Core
+  flutter_riverpod: ^2.6.1
+  async: ^2.12.0
+  freezed_annotation: ^3.0.0
+
+  # Network
+  retrofit: ^4.1.0
+  dio: ^5.4.1
+
+  # UI
+  go_router: ^15.1.1
+  gap: ^3.0.1
+  cached_network_image: ^3.3.1
+  video_player: ^2.9.5
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  build_runner: ^2.4.15
+  mocktail: ^1.0.4
+  riverpod_lint: ^2.6.5
+  custom_lint: ^0.7.5
+  lint: ^2.8.0 # stricter than flutter_lints
+  freezed: ^3.0.6
+  json_serializable: ^6.9.5
+  go_router_builder: ^2.9.0
+  retrofit_generator: ^9.1.9
+
+flutter:
+  uses-material-design: true
+  generate: true

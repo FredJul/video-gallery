@@ -1,0 +1,8 @@
+{
+    "@@locale": "en",
+    "appTitle": "Video Gallery",
+    "retryButton": "Retry",
+    "serverError": "Could not fetch videos. Please try again",
+    "networkError": "No internet or server unreachable",
+    "unexpectedError": "An unexpected error occurred"
+}

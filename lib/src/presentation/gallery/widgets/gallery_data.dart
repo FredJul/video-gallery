@@ -48,7 +48,7 @@ class _GalleryDataState extends ConsumerState<GalleryData> {
       controller: _controller,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        childAspectRatio: 4 / 3,
+        childAspectRatio: 16 / 9,
       ),
       itemCount: widget._videos.length,
       itemBuilder: (context, index) {

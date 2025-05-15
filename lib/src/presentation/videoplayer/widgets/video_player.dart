@@ -65,7 +65,7 @@ class _VideoPlayerState extends State<VideoPlayer> {
     }
 
     if (!_controller.value.isInitialized) {
-      return const Center(child: CircularProgressIndicator());
+      return const Center(child: CircularProgressIndicator.adaptive());
     }
 
     return GestureDetector(

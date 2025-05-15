@@ -12,7 +12,8 @@ class VideoThumbnail extends StatelessWidget {
       imageUrl: thumbnailUrl,
       fit: BoxFit.cover,
       placeholder:
-          (context, url) => const Center(child: CircularProgressIndicator()),
+          (context, url) =>
+              const Center(child: CircularProgressIndicator.adaptive()),
       errorWidget:
           (context, url, error) => Container(
             color: Colors.grey[300],

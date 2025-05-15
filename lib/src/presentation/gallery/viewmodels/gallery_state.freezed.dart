@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$GalleryState implements DiagnosticableTreeMixin {
 
- GalleryStatus get status; List<Video> get videos; Failure? get error;
+ GalleryStatus get status; List<Video> get videos; ViewType get viewType; Failure? get error;
 /// Create a copy of GalleryState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -27,21 +27,21 @@ $GalleryStateCopyWith<GalleryState> get copyWith => _$GalleryStateCopyWithImpl<G
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
     ..add(DiagnosticsProperty('type', 'GalleryState'))
-    ..add(DiagnosticsProperty('status', status))..add(DiagnosticsProperty('videos', videos))..add(DiagnosticsProperty('error', error));
+    ..add(DiagnosticsProperty('status', status))..add(DiagnosticsProperty('videos', videos))..add(DiagnosticsProperty('viewType', viewType))..add(DiagnosticsProperty('error', error));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is GalleryState&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other.videos, videos)&&(identical(other.error, error) || other.error == error));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GalleryState&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other.videos, videos)&&(identical(other.viewType, viewType) || other.viewType == viewType)&&(identical(other.error, error) || other.error == error));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,status,const DeepCollectionEquality().hash(videos),error);
+int get hashCode => Object.hash(runtimeType,status,const DeepCollectionEquality().hash(videos),viewType,error);
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'GalleryState(status: $status, videos: $videos, error: $error)';
+  return 'GalleryState(status: $status, videos: $videos, viewType: $viewType, error: $error)';
 }
 
 
@@ -52,7 +52,7 @@ abstract mixin class $GalleryStateCopyWith<$Res>  {
   factory $GalleryStateCopyWith(GalleryState value, $Res Function(GalleryState) _then) = _$GalleryStateCopyWithImpl;
 @useResult
 $Res call({
- GalleryStatus status, List<Video> videos, Failure? error
+ GalleryStatus status, List<Video> videos, ViewType viewType, Failure? error
 });
 
 
@@ -69,11 +69,12 @@ class _$GalleryStateCopyWithImpl<$Res>
 
 /// Create a copy of GalleryState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? status = null,Object? videos = null,Object? error = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? status = null,Object? videos = null,Object? viewType = null,Object? error = freezed,}) {
   return _then(_self.copyWith(
 status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as GalleryStatus,videos: null == videos ? _self.videos : videos // ignore: cast_nullable_to_non_nullable
-as List<Video>,error: freezed == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
+as List<Video>,viewType: null == viewType ? _self.viewType : viewType // ignore: cast_nullable_to_non_nullable
+as ViewType,error: freezed == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
 as Failure?,
   ));
 }
@@ -85,7 +86,7 @@ as Failure?,
 
 
 class _GalleryState with DiagnosticableTreeMixin implements GalleryState {
-  const _GalleryState({this.status = GalleryStatus.loading, final  List<Video> videos = const <Video>[], this.error}): _videos = videos;
+  const _GalleryState({this.status = GalleryStatus.loading, final  List<Video> videos = const <Video>[], this.viewType = ViewType.grid, this.error}): _videos = videos;
   
 
 @override@JsonKey() final  GalleryStatus status;
@@ -96,6 +97,7 @@ class _GalleryState with DiagnosticableTreeMixin implements GalleryState {
   return EqualUnmodifiableListView(_videos);
 }
 
+@override@JsonKey() final  ViewType viewType;
 @override final  Failure? error;
 
 /// Create a copy of GalleryState
@@ -109,21 +111,21 @@ _$GalleryStateCopyWith<_GalleryState> get copyWith => __$GalleryStateCopyWithImp
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
     ..add(DiagnosticsProperty('type', 'GalleryState'))
-    ..add(DiagnosticsProperty('status', status))..add(DiagnosticsProperty('videos', videos))..add(DiagnosticsProperty('error', error));
+    ..add(DiagnosticsProperty('status', status))..add(DiagnosticsProperty('videos', videos))..add(DiagnosticsProperty('viewType', viewType))..add(DiagnosticsProperty('error', error));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _GalleryState&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other._videos, _videos)&&(identical(other.error, error) || other.error == error));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _GalleryState&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other._videos, _videos)&&(identical(other.viewType, viewType) || other.viewType == viewType)&&(identical(other.error, error) || other.error == error));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,status,const DeepCollectionEquality().hash(_videos),error);
+int get hashCode => Object.hash(runtimeType,status,const DeepCollectionEquality().hash(_videos),viewType,error);
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'GalleryState(status: $status, videos: $videos, error: $error)';
+  return 'GalleryState(status: $status, videos: $videos, viewType: $viewType, error: $error)';
 }
 
 
@@ -134,7 +136,7 @@ abstract mixin class _$GalleryStateCopyWith<$Res> implements $GalleryStateCopyWi
   factory _$GalleryStateCopyWith(_GalleryState value, $Res Function(_GalleryState) _then) = __$GalleryStateCopyWithImpl;
 @override @useResult
 $Res call({
- GalleryStatus status, List<Video> videos, Failure? error
+ GalleryStatus status, List<Video> videos, ViewType viewType, Failure? error
 });
 
 
@@ -151,11 +153,12 @@ class __$GalleryStateCopyWithImpl<$Res>
 
 /// Create a copy of GalleryState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? status = null,Object? videos = null,Object? error = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? status = null,Object? videos = null,Object? viewType = null,Object? error = freezed,}) {
   return _then(_GalleryState(
 status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as GalleryStatus,videos: null == videos ? _self._videos : videos // ignore: cast_nullable_to_non_nullable
-as List<Video>,error: freezed == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
+as List<Video>,viewType: null == viewType ? _self.viewType : viewType // ignore: cast_nullable_to_non_nullable
+as ViewType,error: freezed == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
 as Failure?,
   ));
 }

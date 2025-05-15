@@ -3,7 +3,6 @@ import 'package:gap/gap.dart';
 import 'package:videogallery/src/domain/entities/video.dart';
 import 'package:videogallery/src/presentation/common/router/router.dart';
 import 'package:videogallery/src/presentation/gallery/widgets/user_profile_image.dart';
-import 'package:videogallery/src/presentation/gallery/widgets/username_display.dart';
 import 'package:videogallery/src/presentation/gallery/widgets/video_thumbnail.dart';
 
 class VideoGridItem extends StatelessWidget {
@@ -19,7 +18,6 @@ class VideoGridItem extends StatelessWidget {
         child: Stack(
           fit: StackFit.expand,
           children: [
-            // Thumbnail image
             VideoThumbnail(thumbnailUrl: _video.thumbnailUrl),
 
             // User info at bottom left
@@ -30,7 +28,7 @@ class VideoGridItem extends StatelessWidget {
                 children: [
                   UserProfileImage(imageUrl: _video.userImageUrl),
                   const Gap(8.0),
-                  UsernameDisplay(username: _video.user),
+                  _UsernameDisplay(username: _video.user),
                 ],
               ),
             ),
@@ -40,6 +38,31 @@ class VideoGridItem extends StatelessWidget {
       onTap: () {
         VideoPlayerRoute(videoUrl: _video.videoUrl).push(context);
       },
+    );
+  }
+}
+
+class _UsernameDisplay extends StatelessWidget {
+  final String username;
+
+  const _UsernameDisplay({required this.username});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      decoration: BoxDecoration(
+        color: Colors.black.withAlpha(153), // 0.6 opacity = 153 alpha
+        borderRadius: BorderRadius.circular(4),
+      ),
+      child: Text(
+        username,
+        style: const TextStyle(
+          color: Colors.white,
+          fontSize: 12,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
     );
   }
 }

@@ -122,6 +122,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'An unexpected error occurred'**
   String get unexpectedError;
+
+  /// No description provided for @switchToGridView.
+  ///
+  /// In en, this message translates to:
+  /// **'Switch to grid view'**
+  String get switchToGridView;
+
+  /// No description provided for @switchToListView.
+  ///
+  /// In en, this message translates to:
+  /// **'Switch to list view'**
+  String get switchToListView;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

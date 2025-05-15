@@ -22,4 +22,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get unexpectedError => 'An unexpected error occurred';
+
+  @override
+  String get switchToGridView => 'Switch to grid view';
+
+  @override
+  String get switchToListView => 'Switch to list view';
 }

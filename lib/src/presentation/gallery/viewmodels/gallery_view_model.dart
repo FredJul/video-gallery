@@ -17,6 +17,12 @@ class GalleryViewModel extends AutoDisposeNotifier<GalleryState> {
     return const GalleryState();
   }
 
+  void toggleViewType() {
+    state = state.copyWith(
+      viewType: state.viewType == ViewType.grid ? ViewType.list : ViewType.grid,
+    );
+  }
+
   Future<void> fetchVideos({
     String? query,
     bool emptyCurrentGallery = false,

@@ -28,13 +28,34 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen> {
     final galleryState = ref.watch(galleryViewModelProvider);
 
     return Scaffold(
-      appBar: AppBar(title: Text(context.l10n.appTitle)),
+      appBar: AppBar(
+        title: Text(context.l10n.appTitle),
+        actions: [
+          IconButton(
+            icon: Icon(
+              galleryState.viewType == ViewType.grid
+                  ? Icons.list
+                  : Icons.grid_view,
+            ),
+            tooltip:
+                galleryState.viewType == ViewType.grid
+                    ? context.l10n.switchToListView
+                    : context.l10n.switchToGridView,
+            onPressed: () {
+              ref.read(galleryViewModelProvider.notifier).toggleViewType();
+            },
+          ),
+        ],
+      ),
       body: switch (galleryState.status) {
         GalleryStatus.loading => const GalleryLoading(),
         GalleryStatus.failure => GalleryError(
           error: galleryState.error!.toLocalizedMessage(context),
         ),
-        GalleryStatus.success => GalleryData(videos: galleryState.videos),
+        GalleryStatus.success => GalleryData(
+          videos: galleryState.videos,
+          viewType: galleryState.viewType,
+        ),
       },
     );
   }

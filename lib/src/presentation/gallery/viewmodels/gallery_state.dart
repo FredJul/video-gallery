@@ -7,11 +7,14 @@ part 'gallery_state.freezed.dart';
 
 enum GalleryStatus { loading, success, failure }
 
+enum ViewType { grid, list }
+
 @freezed
 abstract class GalleryState with _$GalleryState {
   const factory GalleryState({
     @Default(GalleryStatus.loading) GalleryStatus status,
     @Default(<Video>[]) List<Video> videos,
+    @Default(ViewType.grid) ViewType viewType,
     Failure? error,
   }) = _GalleryState;
 }

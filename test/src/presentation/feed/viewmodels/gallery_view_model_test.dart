@@ -45,6 +45,23 @@ void main() {
     ),
   ];
 
+  final additionalVideos = [
+    const Video(
+      id: 3,
+      videoUrl: 'https://example.com/video3.mp4',
+      thumbnailUrl: 'https://example.com/thumbnail3.jpg',
+      user: 'User3',
+      userImageUrl: 'https://example.com/user3.jpg',
+    ),
+    const Video(
+      id: 4,
+      videoUrl: 'https://example.com/video4.mp4',
+      thumbnailUrl: 'https://example.com/thumbnail4.jpg',
+      user: 'User4',
+      userImageUrl: 'https://example.com/user4.jpg',
+    ),
+  ];
+
   group('GalleryViewModel', () {
     test('initial state should be correct', () {
       final initialState = container.read(galleryViewModelProvider);
@@ -56,7 +73,11 @@ void main() {
       () async {
         // arrange
         when(
-          () => mockFetchVideosUseCase.call(),
+          () => mockFetchVideosUseCase.call(
+            query: any(named: 'query'),
+            page: any(named: 'page'),
+            pageSize: any(named: 'pageSize'),
+          ),
         ).thenAnswer((_) async => Result.value(testVideos));
 
         // act
@@ -79,7 +100,11 @@ void main() {
       () async {
         // arrange
         when(
-          () => mockFetchVideosUseCase.call(),
+          () => mockFetchVideosUseCase.call(
+            query: any(named: 'query'),
+            page: any(named: 'page'),
+            pageSize: any(named: 'pageSize'),
+          ),
         ).thenAnswer((_) async => Result.error(ServerException(500)));
 
         // act
@@ -96,5 +121,101 @@ void main() {
         );
       },
     );
+
+    test('should add new videos to existing ones when fetching more', () async {
+      // Start with videos in the state
+      when(
+        () => mockFetchVideosUseCase.call(
+          query: any(named: 'query'),
+          page: any(named: 'page'),
+          pageSize: any(named: 'pageSize'),
+        ),
+      ).thenAnswer((_) async => Result.value(testVideos));
+
+      // Initial fetch
+      await container.read(galleryViewModelProvider.notifier).fetchVideos();
+      expect(
+        container.read(galleryViewModelProvider).videos,
+        equals(testVideos),
+      );
+
+      // Mock for additional videos
+      when(
+        () => mockFetchVideosUseCase.call(
+          query: any(named: 'query'),
+          page: any(named: 'page'),
+          pageSize: any(named: 'pageSize'),
+        ),
+      ).thenAnswer((_) async => Result.value(additionalVideos));
+
+      // Fetch more
+      await container.read(galleryViewModelProvider.notifier).fetchVideos();
+
+      // Check that we have both sets of videos now
+      expect(
+        container.read(galleryViewModelProvider).videos.length,
+        equals(testVideos.length + additionalVideos.length),
+      );
+    });
+
+    test('should update data when fetching with new query', () async {
+      // arrange - populate with initial data
+      when(
+        () => mockFetchVideosUseCase.call(
+          query: any(named: 'query'),
+          page: any(named: 'page'),
+          pageSize: any(named: 'pageSize'),
+        ),
+      ).thenAnswer((_) async => Result.value(testVideos));
+
+      // Initial fetch
+      await container.read(galleryViewModelProvider.notifier).fetchVideos();
+
+      when(
+        () => mockFetchVideosUseCase.call(
+          query: any(named: 'query'),
+          page: any(named: 'page'),
+          pageSize: any(named: 'pageSize'),
+        ),
+      ).thenAnswer((_) async => Result.value(additionalVideos));
+
+      // act - fetch with new query
+      await container
+          .read(galleryViewModelProvider.notifier)
+          .fetchVideos(query: 'new search', emptyCurrentGallery: true);
+
+      // assert the query was updated
+      expect(
+        container.read(galleryViewModelProvider).searchQuery,
+        equals('new search'),
+      );
+      // assert the data was updated
+      expect(
+        container.read(galleryViewModelProvider).videos,
+        equals(additionalVideos),
+      );
+    });
+
+    test('should update view type correctly', () {
+      // Check initial state
+      expect(
+        container.read(galleryViewModelProvider).viewType,
+        equals(ViewType.grid), // Default is grid
+      );
+
+      // Toggle to list view
+      container.read(galleryViewModelProvider.notifier).toggleViewType();
+      expect(
+        container.read(galleryViewModelProvider).viewType,
+        equals(ViewType.list),
+      );
+
+      // Toggle back to grid view
+      container.read(galleryViewModelProvider.notifier).toggleViewType();
+      expect(
+        container.read(galleryViewModelProvider).viewType,
+        equals(ViewType.grid),
+      );
+    });
   });
 }

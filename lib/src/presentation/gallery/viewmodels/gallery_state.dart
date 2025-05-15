@@ -15,6 +15,7 @@ abstract class GalleryState with _$GalleryState {
     @Default(GalleryStatus.loading) GalleryStatus status,
     @Default(<Video>[]) List<Video> videos,
     @Default(ViewType.grid) ViewType viewType,
+    @Default("") String searchQuery,
     Failure? error,
   }) = _GalleryState;
 }

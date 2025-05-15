@@ -134,6 +134,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Switch to list view'**
   String get switchToListView;
+
+  /// No description provided for @searchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search for videos...'**
+  String get searchHint;
+
+  /// No description provided for @closeSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Close search'**
+  String get closeSearch;
+
+  /// No description provided for @searchVideos.
+  ///
+  /// In en, this message translates to:
+  /// **'Search videos'**
+  String get searchVideos;
+
+  /// No description provided for @noVideosFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No videos found'**
+  String get noVideosFound;
+
+  /// No description provided for @noVideosFoundDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Try searching with different keywords.'**
+  String get noVideosFoundDescription;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

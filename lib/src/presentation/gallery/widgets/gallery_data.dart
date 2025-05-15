@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gap/gap.dart';
 import 'package:videogallery/src/domain/entities/video.dart';
+import 'package:videogallery/src/presentation/common/l10n/l10n.dart';
 import 'package:videogallery/src/presentation/gallery/viewmodels/gallery_state.dart';
 import 'package:videogallery/src/presentation/gallery/viewmodels/gallery_view_model.dart';
 import 'package:videogallery/src/presentation/gallery/widgets/video_grid_item.dart';
@@ -50,9 +52,46 @@ class _GalleryDataState extends ConsumerState<GalleryData> {
 
   @override
   Widget build(BuildContext context) {
+    // Show empty state if there are no videos
+    if (widget._videos.isEmpty) {
+      return _buildEmptyView();
+    }
+
+    // Otherwise show grid or list view
     return widget.viewType == ViewType.grid
         ? _buildGridView()
         : _buildListView();
+  }
+
+  Widget _buildEmptyView() {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(24.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // No results icon
+            const Icon(Icons.search_off, size: 80, color: Colors.grey),
+            const Gap(16.0),
+            // No results title
+            Text(
+              context.l10n.noVideosFound,
+              style: Theme.of(context).textTheme.headlineSmall,
+              textAlign: TextAlign.center,
+            ),
+            const Gap(8.0),
+            // No results description
+            Text(
+              context.l10n.noVideosFoundDescription,
+              style: Theme.of(
+                context,
+              ).textTheme.bodyMedium?.copyWith(color: Colors.grey),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   Widget _buildGridView() {

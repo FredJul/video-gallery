@@ -16,11 +16,19 @@ class GalleryScreen extends ConsumerStatefulWidget {
 }
 
 class _GalleryScreenState extends ConsumerState<GalleryScreen> {
+  final TextEditingController _searchController = TextEditingController();
+  bool _showSearchBar = false;
+
   @override
   void initState() {
     super.initState();
-
     _fetchVideos();
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
   }
 
   @override
@@ -29,8 +37,30 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(context.l10n.appTitle),
+        title:
+            _showSearchBar ? _buildSearchField() : Text(context.l10n.appTitle),
         actions: [
+          // Search icon
+          IconButton(
+            icon: Icon(_showSearchBar ? Icons.close : Icons.search),
+            tooltip:
+                _showSearchBar
+                    ? context.l10n.closeSearch
+                    : context.l10n.searchVideos,
+            onPressed: () {
+              setState(() {
+                _showSearchBar = !_showSearchBar;
+                if (!_showSearchBar) {
+                  // Clear search when closing
+                  _searchController.clear();
+                  ref
+                      .read(galleryViewModelProvider.notifier)
+                      .updateSearchQuery('');
+                }
+              });
+            },
+          ),
+          // Grid/List toggle
           IconButton(
             icon: Icon(
               galleryState.viewType == ViewType.grid
@@ -56,6 +86,28 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen> {
           videos: galleryState.videos,
           viewType: galleryState.viewType,
         ),
+      },
+    );
+  }
+
+  Widget _buildSearchField() {
+    return TextField(
+      controller: _searchController,
+      decoration: InputDecoration(
+        hintText: context.l10n.searchHint,
+        border: InputBorder.none,
+      ),
+      style: const TextStyle(color: Colors.white),
+      autofocus: true,
+      textInputAction: TextInputAction.search,
+      onChanged: (query) {
+        ref.read(galleryViewModelProvider.notifier).updateSearchQuery(query);
+      },
+      onSubmitted: (query) {
+        // When user presses enter/search button
+        ref
+            .read(galleryViewModelProvider.notifier)
+            .fetchVideos(query: query, emptyCurrentGallery: true);
       },
     );
   }

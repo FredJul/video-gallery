@@ -28,7 +28,7 @@ class VideoGridItem extends StatelessWidget {
                 children: [
                   UserProfileImage(imageUrl: _video.userImageUrl),
                   const Gap(8.0),
-                  _UsernameDisplay(username: _video.user),
+                  _buildUsernameDisplay(_video.user),
                 ],
               ),
             ),
@@ -40,15 +40,8 @@ class VideoGridItem extends StatelessWidget {
       },
     );
   }
-}
 
-class _UsernameDisplay extends StatelessWidget {
-  final String username;
-
-  const _UsernameDisplay({required this.username});
-
-  @override
-  Widget build(BuildContext context) {
+  Widget _buildUsernameDisplay(String username) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(

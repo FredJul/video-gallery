@@ -6,5 +6,10 @@
     "networkError": "No internet or server unreachable",
     "unexpectedError": "An unexpected error occurred",
     "switchToGridView": "Switch to grid view",
-    "switchToListView": "Switch to list view"
+    "switchToListView": "Switch to list view",
+    "searchHint": "Search for videos...",
+    "closeSearch": "Close search",
+    "searchVideos": "Search videos",
+    "noVideosFound": "No videos found",
+    "noVideosFoundDescription": "Try searching with different keywords."
 }

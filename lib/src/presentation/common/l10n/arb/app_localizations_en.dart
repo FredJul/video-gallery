@@ -28,4 +28,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get switchToListView => 'Switch to list view';
+
+  @override
+  String get searchHint => 'Search for videos...';
+
+  @override
+  String get closeSearch => 'Close search';
+
+  @override
+  String get searchVideos => 'Search videos';
+
+  @override
+  String get noVideosFound => 'No videos found';
+
+  @override
+  String get noVideosFoundDescription => 'Try searching with different keywords.';
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:videogallery/src/domain/entities/video.dart';
+import 'package:videogallery/src/presentation/common/router/router.dart';
 import 'package:videogallery/src/presentation/gallery/widgets/user_profile_image.dart';
 import 'package:videogallery/src/presentation/gallery/widgets/username_display.dart';
 import 'package:videogallery/src/presentation/gallery/widgets/video_thumbnail.dart';
@@ -37,7 +38,7 @@ class VideoGridItem extends StatelessWidget {
         ),
       ),
       onTap: () {
-        // TODO: Implement video player screen
+        VideoPlayerRoute(videoUrl: _video.videoUrl).push(context);
       },
     );
   }

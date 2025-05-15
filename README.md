@@ -44,4 +44,5 @@ I however didn't use the generator since it does not bring much value, makes it 
 - Improve infinite loading (with a loading indicator when reaching the end)
 - Make better responsive design to ensure the app looks great on all devices.
 - Expand test coverage (no widget test for now)
+- Use an video id instead of a video url for the VideoPlayer route/screen and then fetch the video via cache or api
 - Theme creation and spacing centralization

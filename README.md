@@ -47,3 +47,4 @@ I however didn't use the generator since it does not bring much value, makes it 
 - Local persistance (sharedpref) of the list/grid preference
 - Use an video id instead of a video url for the VideoPlayer route/screen and then fetch the video via cache or api
 - Theme creation and spacing centralization
+- CI with style/lint/tests validation and compilation

@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:async/async.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:videogallery/src/di/usecase_providers.dart';
 import 'package:videogallery/src/domain/common/result_extension.dart';
 import 'package:videogallery/src/domain/entities/video.dart';
-import 'package:videogallery/src/domain/providers/usecase_providers.dart';
 import 'package:videogallery/src/presentation/common/failures/failures.dart';
 import 'package:videogallery/src/presentation/gallery/viewmodels/gallery_state.dart';
 

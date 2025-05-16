@@ -1,11 +1,11 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:videogallery/src/data/providers/datasource_providers.dart';
 import 'package:videogallery/src/data/repositories/video_repository_impl.dart';
+import 'package:videogallery/src/di/datasource_providers.dart';
 import 'package:videogallery/src/domain/repositories/video_repository.dart';
 
-// This file contains the providers for the repositories used in the app.
-// In theory, the domain layer should not depend on the data layer, this file
-// is here for convenience.
+// Repository providers
+//
+// This file contains providers for all repositories used in the application.
 
 final videoRepositoryProvider = Provider<VideoRepository>((ref) {
   final pixabayRemoteDataSource = ref.watch(pixabayRemoteDataSourceProvider);

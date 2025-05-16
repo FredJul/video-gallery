@@ -22,12 +22,16 @@ class GalleryViewModel extends AutoDisposeNotifier<GalleryState> {
     return const GalleryState();
   }
 
+  /// Toggle the view type between grid and list.
   void toggleViewType() {
     state = state.copyWith(
       viewType: state.viewType == ViewType.grid ? ViewType.list : ViewType.grid,
     );
   }
 
+  /// Update the search query and fetch videos.
+  /// This method is debounced to avoid too many API calls while typing.
+  /// The query can be empty.
   void updateSearchQuery(String query) {
     // Only update if the query actually changed
     if (query == state.searchQuery) return;
@@ -45,6 +49,11 @@ class GalleryViewModel extends AutoDisposeNotifier<GalleryState> {
     });
   }
 
+  /// Fetch videos from the API.
+  /// If [query] is provided, it will override the current search query.
+  /// If [emptyCurrentGallery] is true, it will clear the current gallery
+  /// and start a new fetch operation, otherwise it will append the new videos
+  /// to the existing list.
   Future<void> fetchVideos({
     String? query,
     bool emptyCurrentGallery = false,
